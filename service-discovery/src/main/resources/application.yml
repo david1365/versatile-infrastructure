@@ -1,0 +1,48 @@
+spring:
+  main:
+    banner-mode: off
+  application:
+    name: ${versatile.service-discovery.application.name:versatile-eureka-service-discovery}
+  profiles:
+    active: '@spring.profiles.active@'
+  security:
+    basic:
+      enabled: true
+    user:
+      name: ${versatile.service-discovery.security.user:admin}
+      password: ${versatile.service-discovery.security.password:admin}
+      roles: ${versatile.service-discovery.security.roles:manager}
+
+server:
+  port: ${versatile.service-discovery.port:8761}
+
+eureka:
+  instance:
+    hostname: ${versatile.service-discovery.instance.hostname:default}
+    appname: ${versatile.service-discovery.instance.appname:default}
+  client:
+    registerWithEureka: ${versatile.service-discovery.client.registerWithEureka:true}
+    fetchRegistry: ${versatile.service-discovery.client.fetchRegistry:true}
+    service-url:
+      defaultZone: ${versatile.service-discovery.client.service-url.defaultZone:http://admin:admin@my-eureka-server1.com:8741/eureka,http://admin:admin@my-eureka-server2.com:8751/eureka}
+
+
+######## Logging ############################
+logging:
+  file:
+    name: ${versatile.service-discovery.logging.file.name:versatile-service-discovery.log}
+    path: ${versatile.service-discovery.logging.file.path:.}
+  level:
+    ir:
+      caspco: ${versatile.service-discovery.logging.level.ir.caspco:TRACE}
+    org:
+      hibernate: ${versatile.service-discovery.logging.level.org.hibernate:DEBUG}
+      springframework: ${versatile.service-discovery.logging.level.org.springframework:DEBUG}
+      springframework.cloud.gateway: ${versatile.service-discovery.logging.level:DEBUG}
+    reactor:
+      netty:
+        http:
+          client: ${versatile.service-discovery.logging.level.reactor.netty.http.client:DEBUG}
+    root: ${versatile.service-discovery.logging.level.root:DEBUG}
+    tech:
+      hardik: ${versatile.service-discovery.logging.level.tech.hardik:DEBUG}

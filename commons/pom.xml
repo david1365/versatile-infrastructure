@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <developers>
+        <developer>
+            <id>d.akbari</id>
+            <name>Davood Akbari</name>
+            <email>daak1365@gmail.com</email>
+            <organization>CASPCO Corp.</organization>
+            <roles>
+                <role>lead</role>
+                <role>developer</role>
+            </roles>
+        </developer>
+    </developers>
+
+    <parent>
+        <artifactId>versatile-infrastructure</artifactId>
+        <groupId>ir.caspco.versatile</groupId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>commons</artifactId>
+
+    <packaging>pom</packaging>
+
+
+    <modules>
+        <module>common-context</module>
+        <module>common-jms-client</module>
+        <module>common-rest-client</module>
+        <module>common-util</module>
+        <module>common-validation</module>
+        <module>common-configuration</module>
+        <module>common-handler-exceptions</module>
+        <module>jms-client</module>
+        <module>rest-client</module>
+        <module>common-security-basic</module>
+        <module>common-client-service-discovery</module>
+        <module>validation</module>
+        <module>common-gateway</module>
+        <module>common-correlation</module>
+        <module>common-global-log</module>
+        <module>common-batch-exception-listener</module>
+        <module>common-exceptions-log</module>
+        <module>common-swagger</module>
+        <module>common-oauth2-resourceserver</module>
+    </modules>
+
+</project>

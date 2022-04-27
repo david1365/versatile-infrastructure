@@ -1,0 +1,37 @@
+{
+  "wallet-pec": {
+    "path": {
+      "AddCustomer": "/Customer/AddCustomer",
+      "AddWallet": "/Wallet/AddWallet"
+    },
+    "route": {
+      "id": "${versatile.gateway.walletPec.id:w.pec.ir}",
+      "uri": "${versatile.gateway.walletPec.uri:https://w.pec.ir}",
+      "path": "${versatile.gateway.walletPec.path:/wallet/pec/**}",
+      "userName": "${versatile.gateway.walletPec.userName:WalletUserCaspian@pec.ir}",
+      "password": "${versatile.gateway.walletPec.password:a_r@2T36#!}"
+    },
+    "request": {
+      "body": {
+        "inject": {
+          "static": {
+            "*": {
+              "CorporationPIN": "93847A06561D5646067685995156FD01",
+              "MediaTypeId": 12
+            },
+            "/wallet/pec/Customer/AddCustomer": {
+              "IsActive": true
+            },
+            "/wallet/pec/Wallet/AddWallet": {
+              "GroupWalletId": 1
+            },
+            "/wallet/pec/FinancialOperation/ChargeWallet": {
+              "STerminalNumber": 0,
+              "SPosConditionCode": 59
+            }
+          }
+        }
+      }
+    }
+  }
+}

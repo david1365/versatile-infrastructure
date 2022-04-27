@@ -1,0 +1,107 @@
+server:
+  port:  ${versatile.api-gateway.port:8090}
+  ssl:
+    enabled: ${versatile.api-gateway.ssl.enabled:true}
+    key-alias: ${versatile.api-gateway.ssl.key-alias:caspian}
+    key-store: ${versatile.api-gateway.ssl.key-store:keystore.jks}
+    key-store-password: ${versatile.api-gateway.ssl.key-store-password:ir.caspco}
+    key-store-type: ${versatile.api-gateway.ssl.key-store-type:JKS}
+
+  servlet:
+    context-path: ${versatile.api-gateway.context-path:/gateway}
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${versatile.api-gateway.service-discovery.client.service-url.defaultZone:http://admin:admin@localhost:8761/eureka}
+
+spring:
+  main:
+    banner-mode: off
+  application:
+    name: versatile-api-gateway
+  profiles:
+    active: '@spring.profiles.active@'
+
+  cloud:
+    gateway:
+      httpclient:
+        wiretap: ${versatile.application.httpclient.wiretap:true}
+        httpserver:
+          wiretap: ${versatile.application.httpserver.wiretap:true}
+
+      default-filters:
+#        - TokenRelay
+        - RemoveRequestHeader=Cookie
+      routes:
+        - id: VERSATILE-CARD-WALLET
+          uri: lb://VERSATILE-CARD-WALLET
+          predicates:
+            - Path=${versatile.api-gateway.routes.Path.hampa-card-wallet:${server.servlet.context-path}/hampa/**}
+          filters:
+            - StripPrefix=${versatile.api-gateway.routes.filters.StripPrefix.hampa-card-wallet:2}
+
+
+        - id: AUTHORIZATION-SERVER
+          uri: ${versatile.api-gateway.routes.uri.authorization-server:http://localhost:8180}
+          predicates:
+            - Path=${server.servlet.context-path}/auth/login
+          filters:
+            - SetPath=${versatile.api-gateway.routes.filters.SetPath.authorization-server:/auth/realms/api-gateway/protocol/openid-connect/token}
+
+#  security:
+#    oauth2:
+#      resourceserver:
+#        jwt:
+#          issuer-uri: ${versatile.api-gateway.security.oauth2.issuer-uri:http://localhost:8180/auth/realms/api-gateway}
+#          jwk-set-uri: ${versatile.api-gateway.security.oauth2.jwk-set-uri:http://localhost:8180/auth/realms/api-gateway/protocol/openid-connect/certs}
+#
+#
+#      client:
+#        registration:
+#          keycloak:
+#            client-id: ${versatile.api-gateway.security.oauth2.registration.client-id:client-api-gateway}
+#            client-secret: ${versatile.api-gateway.security.oauth2.registration.client-secret:4a272860-07b1-4048-8f72-70285b6da7f0}
+#            clientName: ${versatile.api-gateway.security.oauth2.registration.clientName:client-api-gateway}
+#            authorization-grant-type:  ${versatile.api-gateway.security.oauth2.registration.authorization-grant-type:password}
+#
+#        provider:
+#          keycloak:
+#            authorization-uri: ${versatile.api-gateway.security.oauth2.authorization-uri:http://localhost:8180/auth/realms/api-gateway/protocol/openid-connect/auth}
+#            token-uri: ${versatile.api-gateway.security.oauth2.token-uri:http://localhost:8180/auth/realms/api-gateway/protocol/openid-connect/token}
+#            user-info-uri: ${versatile.api-gateway.security.oauth2.user-info-uri:http://localhost:8180/auth/realms/api-gateway/protocol/openid-connect/userinfo}
+#            jwk-set-uri: ${versatile.api-gateway.security.oauth2.jwk-set-uri:http://localhost:8180/auth/realms/api-gateway/protocol/openid-connect/certs}
+#            user-name-attribute: ${versatile.api-gateway.security.oauth2.user-name-attribute:preferred_username}
+
+#security:
+#  swagger:
+#    whitelist: ${versatile.api-gateway.security.swagger.whitelist:/hampa}
+#  oauth2:
+#    client:
+#      issuer-uri: ${versatile.api-gateway.security.oauth2.issuer-uri:http://localhost:8180/auth/realms/api-gateway}
+#      authorization-uri: ${versatile.api-gateway.security.oauth2.authorization-uri:http://localhost:8180/auth/realms/api-gateway/protocol/openid-connect/auth}
+#      user-name-attribute: ${versatile.api-gateway.security.oauth2.user-name-attribute:preferred_username}
+#      registration:
+#        client-id: ${versatile.api-gateway.security.oauth2.registration.client-id:client-api-gateway}
+#        client-secret: ${versatile.api-gateway.security.oauth2.registration.client-secret:4a272860-07b1-4048-8f72-70285b6da7f0}
+
+######## Logging ############################
+logging:
+  file:
+    name: ${versatile.api-gateway.logging.file.name:versatile-api-gateway.log}
+    path: ${versatile.api-gateway.logging.file.path:.}
+  level:
+    ir:
+      caspco: ${versatile.api-gateway.logging.level.ir.caspco:TRACE}
+    org:
+      hibernate: ${versatile.api-gateway.logging.level.org.hibernate:DEBUG}
+      springframework: ${versatile.api-gateway.logging.level.org.springframework:DEBUG}
+      springframework.cloud.gateway: ${versatile.api-gateway.logging.level:DEBUG}
+    reactor:
+      netty:
+        http:
+          client: ${versatile.api-gateway.logging.level.reactor.netty.http.client:DEBUG}
+    root: ${versatile.api-gateway.logging.level.root:DEBUG}
+    tech:
+      hardik: ${versatile.api-gateway.logging.level.tech.hardik:DEBUG}
+

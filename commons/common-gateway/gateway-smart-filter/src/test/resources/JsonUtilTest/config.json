@@ -1,0 +1,70 @@
+{
+  "wallet-pec": {
+    "paths": {
+      "AddCustomer": "/Customer/AddCustomer",
+      "AddWallet": "/Wallet/AddWallet"
+    },
+    "route": {
+      "id": "${versatile.gateway.walletPec.id:w.pec.ir}",
+      "uri": "${versatile.gateway.walletPec.uri:https://w.pec.ir}",
+      "path": "${versatile.gateway.walletPec.path:/wallet/pec/**}",
+      "userName": "${versatile.gateway.walletPec.userName:WalletUserCaspian@pec.ir}",
+      "password": "${versatile.gateway.walletPec.password:a_r@2T36#!}"
+    },
+    "request": {
+      "body": {
+        "inject": {
+          "static": {
+            "*": {
+              "CorporationPIN": "93847A06561D5646067685995156FD01"
+            },
+            "shared": {
+              "MediaTypeId": 12
+            },
+            "paths": {
+              "/wallet/pec/Customer/AddCustomer": {
+                "mine": {
+                  "IsActive": true
+                }
+              },
+              "/wallet/pec/Wallet/AddWallet": {
+                "mine": {
+                  "GroupWalletId": 1
+                }
+              },
+              "/wallet/pec/FinancialOperation/ChargeWallet": {
+                "common": [
+                  "shared"
+                ],
+                "mine": {
+                  "STerminalNumber": 0,
+                  "SPosConditionCode": 59
+                }
+              },
+              "/Customer/GetCustomerTransaction": {
+                "common": [
+                  "shared"
+                ]
+              },
+              "/wallet/pec/FinancialOperation/DeChargeWallet": {
+                "common": [
+                  "shared"
+                ]
+              }
+            }
+          },
+          "dynamic": {
+            "a": [
+              "methodA",
+              "methodC"
+            ],
+            "b": [
+              "methodB",
+              "methodA"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

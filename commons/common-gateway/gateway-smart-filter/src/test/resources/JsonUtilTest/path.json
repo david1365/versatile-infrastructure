@@ -1,0 +1,14 @@
+{
+  "wallet-pec": {
+    "path": {
+      "AddCustomer": "/Customer/AddCustomer",
+      "AddWallet": "/Wallet/AddWallet"
+    }
+  },
+  "wallet-pec2": {
+    "path2": {
+      "AddCustomer2": "/Customer/AddCustomer",
+      "AddWallet2": "/Wallet/AddWallet"
+    }
+  }
+}

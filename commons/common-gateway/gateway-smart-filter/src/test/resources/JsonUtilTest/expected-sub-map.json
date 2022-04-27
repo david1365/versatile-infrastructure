@@ -1,0 +1,16 @@
+{
+  "*": {
+    "CorporationPIN": "93847A06561D5646067685995156FD01",
+    "MediaTypeId": 12
+  },
+  "/wallet/pec/Customer/AddCustomer": {
+    "IsActive": true
+  },
+  "/wallet/pec/Wallet/AddWallet": {
+    "GroupWalletId": 1
+  },
+  "/wallet/pec/FinancialOperation/ChargeWallet": {
+    "STerminalNumber": 0,
+    "SPosConditionCode": 59
+  }
+}

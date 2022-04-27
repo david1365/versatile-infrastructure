@@ -1,0 +1,6 @@
+{
+  "wallet-pec2.path2.AddWallet2": "/Wallet/AddWallet",
+  "wallet-pec2.path2.AddCustomer2": "/Customer/AddCustomer",
+  "wallet-pec.path.AddWallet": "/Wallet/AddWallet",
+  "wallet-pec.path.AddCustomer": "/Customer/AddCustomer"
+}
